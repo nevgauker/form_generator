@@ -1,0 +1,13 @@
+{
+  "version": "6",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1716302395604,
+      "tag": "0000_aromatic_justice",
+      "breakpoints": true
+    }
+  ]
+}
