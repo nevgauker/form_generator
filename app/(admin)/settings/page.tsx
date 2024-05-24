@@ -1,4 +1,3 @@
-import React from 'react'
 import { auth, signIn } from '@/auth'
 import ManageSubscription from './ManageSubscription'
 import { db } from '@/db'

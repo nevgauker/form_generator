@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import { getUserForms } from '@/app/actions/getUserForms'
 import { MAX_FREE_FROMS } from '@/lib/utils'
@@ -30,7 +29,7 @@ const UpdgradeAccBtn = async (props: Props) => {
         {formCount} out of {MAX_FREE_FROMS} forms generated.
       </p>
       <p>
-        <SubscribeBtn price='price_1Oeu01C0XQCoR9vaO7GKAKRJ' userId={userId} />{' '}
+        <SubscribeBtn price='price_1PJtBZIS7J0NIWeQWDbHqIUH' userId={userId} />{' '}
         for unlimited forms.
       </p>
     </div>

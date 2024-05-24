@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 // import PlausibleProvider from 'next-plausible'
 import FormGenerator from '@/app/form_generator'

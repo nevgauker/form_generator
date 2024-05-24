@@ -1,5 +1,5 @@
 'use client'
-import React, { use, useCallback } from 'react'
+import { use, useCallback } from 'react'
 import {
   Select,
   SelectContent,

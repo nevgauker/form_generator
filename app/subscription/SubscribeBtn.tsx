@@ -1,6 +1,5 @@
 'use client'
 import { getStripe } from '@/lib/stripe-client'
-import React from 'react'
 import { useRouter } from 'next/navigation'
 
 type Props = {

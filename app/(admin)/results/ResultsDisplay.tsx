@@ -1,4 +1,3 @@
-import React from 'react'
 import { Table } from './Table'
 import { db } from '@/db'
 import { eq } from 'drizzle-orm'

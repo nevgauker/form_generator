@@ -1,5 +1,7 @@
 import NextAuth, { type Session, type User } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import FacebookProvider from 'next-auth/providers/facebook'
+
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import { db } from '@/db/index'
 
@@ -15,6 +17,10 @@ export const {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_CLIENT_ID,
+    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    // }),
   ],
   callbacks: {
     async session({ session, user }: { session: Session; user?: User }) {
