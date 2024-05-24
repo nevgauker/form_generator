@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 import { saveForm } from './mutateForm'
+import { auth } from '@/auth'
 
 export async function generateForm(
   prevState: {
@@ -11,6 +12,15 @@ export async function generateForm(
   },
   formData: FormData,
 ) {
+  const session = await auth()
+  const user = session?.user
+
+  if (user && user.email !== 'nevgauker@gmail.com') {
+    return {
+      message: 'Onle rotem can generate forms for now',
+    }
+  }
+
   const schema = z.object({
     description: z.string().min(1),
   })
@@ -54,8 +64,6 @@ export async function generateForm(
     })
 
     const json = await response.json()
-
-    console.log(json)
 
     const responseObj = JSON.parse(json.choices[0].message.content)
 
