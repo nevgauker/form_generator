@@ -31,7 +31,6 @@ const FormsPicker = (props: FormsPickerProps) => {
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      // console.log('searchParams', searchParams)
       const params = new URLSearchParams(searchParams.toString())
       params.set(name, value)
 

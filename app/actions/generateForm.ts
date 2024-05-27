@@ -16,7 +16,6 @@ export async function generateForm(
   const user = session?.user
 
   if (user && user.email !== 'nevgauker@gmail.com') {
-    console.log('only rotem can generate forms for now')
     return {
       message: 'Onle rotem can generate forms for now',
     }
@@ -30,7 +29,7 @@ export async function generateForm(
   })
 
   if (!parse.success) {
-    // console.log(parse.error)
+    console.log(parse.error)
     return {
       message: 'Failed to parse data',
     }

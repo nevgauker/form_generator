@@ -39,37 +39,32 @@ const Form = (props: Props) => {
   const { editMode } = props
   const [successDialogOpen, setSuccessDialogOpen] = useState(false)
 
-  // console.log(`form: ${form}`)
-
-  // console.log(`questions: ${JSON.stringify(form)}`)
-
   const handleDialogChange = (open: boolean) => {
     setSuccessDialogOpen(open)
   }
 
   const onSubmit = async (data: any) => {
-    console.log(JSON.stringify(data))
     if (editMode) {
       await publishForm(props.form.id)
       setSuccessDialogOpen(true)
     } else {
       let answers = []
       for (const [questionId, value] of Object.entries(data)) {
-        // console.log(questionId, value)
         const id = parseInt(questionId.replace('question_', ''))
         let fieldOptionsId = null
         let textValue = null
-        // console.log(`value:${value}`)
         if (typeof value == 'string' && value.includes('answerId_')) {
           fieldOptionsId = parseInt(value.replace('answerId_', ''))
         } else {
           textValue = value as string
         }
 
-        if (!textValue && !fieldOptionsId) {
-          setErr('Please answer all questions')
-          return
-        }
+        //it will optional for now
+
+        // if (!textValue && !fieldOptionsId) {
+        //   setErr('Please answer all questions')
+        //   return
+        // }
 
         answers.push({
           questionId: id,
@@ -77,8 +72,6 @@ const Form = (props: Props) => {
           value: textValue,
         })
       }
-
-      console.log(`the answers are:  ${answers}`)
 
       const baseUrl =
         process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'

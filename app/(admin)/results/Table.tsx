@@ -73,7 +73,7 @@ export function Table(props: TableProps) {
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
-  console.log(data[1])
+
   return (
     <div className='p-2 mt-4'>
       <div className='shadow overflow-hidden border border-gray-200 sm:rounded-lg'>
