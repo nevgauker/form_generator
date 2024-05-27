@@ -35,29 +35,40 @@ interface Form extends FormSelectModel {
 const Form = (props: Props) => {
   const form = useForm()
   const router = useRouter()
+  const [err, setErr] = useState<string | null>(null)
   const { editMode } = props
   const [successDialogOpen, setSuccessDialogOpen] = useState(false)
+
+  // console.log(`form: ${form}`)
+
+  // console.log(`questions: ${JSON.stringify(form)}`)
 
   const handleDialogChange = (open: boolean) => {
     setSuccessDialogOpen(open)
   }
 
   const onSubmit = async (data: any) => {
-    console.log(data)
+    console.log(JSON.stringify(data))
     if (editMode) {
       await publishForm(props.form.id)
       setSuccessDialogOpen(true)
     } else {
       let answers = []
       for (const [questionId, value] of Object.entries(data)) {
+        // console.log(questionId, value)
         const id = parseInt(questionId.replace('question_', ''))
         let fieldOptionsId = null
         let textValue = null
-
+        // console.log(`value:${value}`)
         if (typeof value == 'string' && value.includes('answerId_')) {
           fieldOptionsId = parseInt(value.replace('answerId_', ''))
         } else {
           textValue = value as string
+        }
+
+        if (!textValue && !fieldOptionsId) {
+          setErr('Please answer all questions')
+          return
         }
 
         answers.push({
@@ -66,6 +77,8 @@ const Form = (props: Props) => {
           value: textValue,
         })
       }
+
+      console.log(`the answers are:  ${answers}`)
 
       const baseUrl =
         process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
@@ -77,6 +90,7 @@ const Form = (props: Props) => {
         },
         body: JSON.stringify({ formId: props.form.id, answers }),
       })
+
       if (response.status === 200) {
         router.push(`/forms/${props.form.id}/success`)
       } else {
@@ -88,6 +102,7 @@ const Form = (props: Props) => {
 
   return (
     <div className='text-center'>
+      {err && <p>{err}</p>}
       <h1 className='text-lg font-bold py-3'>{props.form.name}</h1>
       <h3 className='text-md'>{props.form.description}</h3>
       <FormComponent {...form}>

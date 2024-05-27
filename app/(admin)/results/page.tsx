@@ -15,7 +15,7 @@ const page = async ({
 }) => {
   const userForms: Array<InferSelectModel<typeof forms>> = await getUserForms()
 
-  console.log(userForms[0])
+  // console.log(userForms[0])
 
   if (!userForms?.length || userForms.length === 0) {
     return <div>No forms found</div>

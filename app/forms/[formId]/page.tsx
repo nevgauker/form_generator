@@ -27,7 +27,6 @@ const page = async ({
       },
     },
   })
-
   if (!form) {
     return <div>Form not found</div>
   }

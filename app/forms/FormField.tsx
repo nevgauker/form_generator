@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, FormEvent, FormEventHandler } from 'react'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   Select,
@@ -14,13 +14,19 @@ import { Input } from '@/components/ui/input'
 import { QuestionSelectModel } from '@/types/form-types'
 import { FieldOptionSelectModel } from '@/types/form-types'
 import { Label } from '@/components/ui/label'
+import { boolean } from 'drizzle-orm/pg-core'
 
 type Props = {
   element: QuestionSelectModel & {
     fieldOptions: Array<FieldOptionSelectModel>
   }
   value: string
-  onChange: (value?: string | ChangeEvent<HTMLInputElement>) => void
+  onChange: (
+    value?:
+      | string
+      | boolean
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void
 }
 
 const FormField = ({ element, value, onChange }: Props) => {
@@ -28,8 +34,8 @@ const FormField = ({ element, value, onChange }: Props) => {
 
   const components = {
     Input: () => <Input type='text' onChange={onChange} />,
-    Switch: () => <Switch />,
-    Textarea: () => <Textarea />,
+    Switch: () => <Switch onCheckedChange={onChange} />,
+    Textarea: () => <Textarea onChange={onChange} />,
     Select: () => (
       <Select onValueChange={onChange}>
         <SelectTrigger>
