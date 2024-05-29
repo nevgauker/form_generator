@@ -4,6 +4,7 @@ import { SessionProvider } from 'next-auth/react'
 import { SidebarNavItem } from '@/types/nav-types'
 import UpdgradeAccBtn from '@/components/navigation/updgradeAccBtn'
 import FormGenerator from '@/app//form_generator'
+import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 
 export default function AdminLayout({
   children,
@@ -45,7 +46,7 @@ export default function AdminLayout({
     <div className='flex min-h-screen flex-col space-y-6'>
       <Header />
       <div className='container grid gap-12 md:grid-cols-[200px_1fr] flex-1'>
-        <aside className='hidden w-[200px] flex-col md:flex pr-2 border-r justify-between'>
+        <aside className='flex-col md:flex pr-2 border-r justify-between'>
           <DashboardNav items={dashboardConfig.sidebarNav} />
           <UpdgradeAccBtn />
         </aside>

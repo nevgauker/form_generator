@@ -15,7 +15,7 @@ export async function generateForm(
   const session = await auth()
   const user = session?.user
 
-  if (user && user.email !== 'nevgauker@gmail.com') {
+  if (user && (user.email !== 'nevgauker@gmail.com' || 'mekkie@puddlea.com')) {
     return {
       message: 'Onle rotem can generate forms for now',
     }
