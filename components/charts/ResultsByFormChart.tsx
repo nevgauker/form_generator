@@ -10,14 +10,14 @@ import {
   YAxis,
 } from 'recharts'
 
-type UsersByDateChartProps = {
+type SubmissionsByFormChartProps = {
   data: {
     formName: string
-    totalResults: number
+    submissions: number
   }[]
 }
 
-export function ResultsByFormChart({ data }: UsersByDateChartProps) {
+export function SubmissionsByFormChart({ data }: SubmissionsByFormChartProps) {
   return (
     <ResponsiveContainer width='100%' minHeight={300}>
       <BarChart data={data}>
@@ -26,7 +26,7 @@ export function ResultsByFormChart({ data }: UsersByDateChartProps) {
         <YAxis stroke='hsl(var(--primary))' />
         <Tooltip cursor={{ fill: 'hsl(var(--muted))' }} />
         <Bar
-          dataKey='totalResults'
+          dataKey='submissions'
           type='monotone'
           name='Submissions: '
           stroke='hsl(var(--primary))'
