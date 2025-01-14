@@ -1,3 +1,4 @@
+import { forms } from './../../db/schema';
 'use server'
 
 import { revalidatePath } from 'next/cache'
@@ -5,6 +6,8 @@ import { z } from 'zod'
 
 import { saveForm } from './mutateForm'
 import { auth } from '@/auth'
+import { getUserForms } from './getUserForms'
+import { getUserSubscription } from './userSubscriptions';
 
 export async function generateForm(
   prevState: {
@@ -14,10 +17,24 @@ export async function generateForm(
 ) {
   const session = await auth()
   const user = session?.user
+  const forms = await getUserForms()
 
-  if (user && (user.email !== 'nevgauker@gmail.com' || 'mekkie@puddlea.com')) {
+  const MAX_FREE_FORMS = 3
+  const MAX_PREMIUM_FORMS = 50
+
+  if (! user || !user?.id) {
+    throw new Error('User ID is required to fetch subscription.');
+  }
+  const subscribed = await getUserSubscription({userId: user.id})
+  if (!subscribed){
+    if ( forms.length >= MAX_FREE_FORMS ){
+      return {
+        message: 'Free users can only generate 3 forms',
+      }
+    }
+  }else if (forms.length>=MAX_PREMIUM_FORMS){
     return {
-      message: 'Onle rotem can generate forms for now',
+      message: 'Premium  users can only generate 50 forms',
     }
   }
 
